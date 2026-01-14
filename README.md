@@ -14,7 +14,7 @@ A modern claymorphic inventory management application built with Laravel.
 1. **Clone the repository**
    ```bash
    git clone "link"
-   cd midterm-InventorySystem-app
+   cd InventorySystem_test
    ```
 
 2. **Install PHP dependencies**
