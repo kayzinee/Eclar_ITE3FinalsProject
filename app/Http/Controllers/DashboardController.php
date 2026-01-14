@@ -32,6 +32,9 @@ class DashboardController extends Controller
             }])
             ->get();
 
-        return view('dashboard', compact('totalProducts', 'totalCategories', 'lowStock', 'inventoryValue', 'reorderRate', 'categories', 'qtyCol'));
+        // Load all products with categories for the products section
+        $allProducts = Product::with('category')->get();
+
+        return view('dashboard', compact('totalProducts', 'totalCategories', 'lowStock', 'inventoryValue', 'reorderRate', 'categories', 'qtyCol', 'allProducts'));
     }
 }
