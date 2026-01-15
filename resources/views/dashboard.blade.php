@@ -257,6 +257,20 @@
                 </select>
             </div>
         </div>
+        <!-- Export Button -->
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 16px;">
+            <form method="GET" action="{{ route('dashboard.export.pdf') }}" id="exportForm">
+                <input type="hidden" name="search" id="exportSearch">
+                <input type="hidden" name="category" id="exportCategory">
+
+                <button type="submit"
+                    style="background: var(--teal); color: white; padding: 10px 16px; border-radius: 6px; font-weight: 600; transition: all 0.2s ease;"
+                    onmouseover="this.style.background='var(--coral)'"
+                    onmouseout="this.style.background='var(--teal)'">
+                    <i class="fas fa-file-export mr-2"></i> Export Filtered Products
+                </button>
+            </form>
+        </div>
 
         <!-- Products Table -->
         <div style="overflow-x: auto; margin-bottom: 20px;">
@@ -342,6 +356,22 @@
                 currentPage = 1;
                 displayPage();
             }
+
+            function syncExportFilters() {
+                document.getElementById('exportSearch').value =
+                    document.getElementById('productSearch').value;
+
+                document.getElementById('exportCategory').value =
+                    document.getElementById('categoryFilter').value;
+            }
+
+                // Sync whenever filters change
+                document.getElementById('productSearch').addEventListener('keyup', syncExportFilters);
+                document.getElementById('categoryFilter').addEventListener('change', syncExportFilters);
+
+                // Initial sync
+                syncExportFilters();
+
 
             function displayPage() {
                 const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);

@@ -18,6 +18,9 @@ Route::get('/', function () {
 // Laravel Breeze Authentication Routes
 require __DIR__.'/auth.php';
 
+// Public PDF exports
+Route::get('/dashboard/export-pdf', [DashboardController::class, 'exportPdf'])->name('dashboard.export.pdf');
+
 /*
 |--------------------------------------------------------------------------
 | Authenticated Routes
@@ -40,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('{product}/delete', [ProductController::class, 'destroy'])->name('destroy');
         Route::put('/{product}', [ProductController::class, 'update'])->name('update.rest');
         Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy.rest');
+
         // Trash management routes
         Route::get('/trash/list', [ProductController::class, 'trash'])->name('trash');
         Route::put('{id}/restore', [ProductController::class, 'restore'])->name('restore');
